@@ -161,7 +161,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2022/06/06/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2/">网络安全攻防复习题</a>
+      <a class="article-title" href="/2022/06/06/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2/">网络安全攻防</a>
     </h1>
   
 
@@ -174,157 +174,8 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="网络安全法"><a href="#网络安全法" class="headerlink" title="网络安全法"></a>网络安全法</h1><p>立法时间：2017.6.1正式实施</p>
-<h2 id="网络安全的三个目标（CIA）："><a href="#网络安全的三个目标（CIA）：" class="headerlink" title="网络安全的三个目标（CIA）："></a>网络安全的三个目标（CIA）：</h2><ol>
-<li>机密性  2. 完整性  3. 可用性</li>
-</ol>
-<h2 id="Nmap四项基本功能："><a href="#Nmap四项基本功能：" class="headerlink" title="Nmap四项基本功能："></a>Nmap四项基本功能：</h2><ol>
-<li>主机发现 </li>
-<li>端口扫描</li>
-<li>版本侦测</li>
-<li>操作系统侦测</li>
-</ol>
-<h3 id="zenmap十种扫描方式"><a href="#zenmap十种扫描方式" class="headerlink" title="zenmap十种扫描方式"></a>zenmap十种扫描方式</h3><ul>
-<li><p>第一种：Intense scan</p>
-<pre><code>  (nmap -T4 -A -v)
-
-  一般来说，Intense scan可以满足一般扫描
-
-  -T4 加快执行速度
-
-  -A 操作系统及版本探测
-
-  -v 显示详细的输出
-</code></pre>
-</li>
-<li><p>第二种：Intense scan plus UDP</p>
-<pre><code>  (nmap -sS -sU -T4 -A -v)
-
-  即UDP扫描
-
-  -sS  TCP SYN 扫描
-
-  -sU  UDP 扫描
-</code></pre>
-</li>
-<li><p>第三种：Intense scan,all TCP ports</p>
-<pre><code>  (nmap -p 1-65536 -T4 -A -v)
-
-  扫描所有TCP端口，范围在1-65535，试图扫描所有端口的开放情况，速度比较慢。
-
-  -p 指定端口扫描范围
-</code></pre>
-</li>
-<li><p>第四种：Intense scan,no ping</p>
-<pre><code>  (nmap -T4 -A -v -Pn)
-
-  非ping扫描
-
-  -Pn 非ping扫描
-</code></pre>
-</li>
-<li><p>第五种：Ping scan</p>
-<pre><code>  (nmap -sn)
-
-  Ping 扫描
-
-  优点：速度快。
-
-  缺点：容易被防火墙屏蔽，导致无扫描结果
-
-  -sn ping扫描
-</code></pre>
-</li>
-<li><p>第六种：Quick scan</p>
-<pre><code>  (nmap -T4 -F)
-
-  快速的扫描
-
-  -F 快速模式。
-</code></pre>
-</li>
-<li><p>第七种：Quick scan plus</p>
-<pre><code>  (nmap -sV -T4 -O -F --version-light)
-
-  快速扫描加强模式
-
-  -sV 探测端口及版本服务信息。
-
-  -O 开启OS检测
-
-  --version-light 设定侦测等级为2。
-</code></pre>
-</li>
-<li><p>第八种：Quick traceroute</p>
-<pre><code>  (nmap -sn --traceroute)
-
-  路由跟踪
-
-  -sn Ping扫描，关闭端口扫描
-
-  -traceroute 显示本机到目标的路由跃点。
-</code></pre>
-</li>
-<li><p>第九种：Regular scan</p>
-<pre><code>  规则扫描
-</code></pre>
-</li>
-<li><p>第十种：Slow comprehensive scan 慢速全面扫描</p>
-<pre><code>  (nmap -sS -sU -T4 -A -v -PE -PP -PS80,443,-PA3389,PU40125 -PY -g 53 --script all)
-</code></pre>
-</li>
-</ul>
-<h2 id="MSF的功能模块介绍"><a href="#MSF的功能模块介绍" class="headerlink" title="MSF的功能模块介绍:"></a>MSF的功能模块介绍:</h2><ul>
-<li><p>1、Auxiliary（辅助模块）</p>
-<pre><code> 为渗透测试信息搜集提供了大量的辅助模块支持
-</code></pre>
-</li>
-<li><p>2、Exploits（攻击模块）</p>
-<pre><code>  利用发现的安全漏洞或配置弱点对远程目标系统 进行攻击，从而获得对远程目标系统访问权的代码组件。
-</code></pre>
-</li>
-<li><p>3、Payload（攻击载荷模块）</p>
-<pre><code>  利用漏洞之前要先建立一个Payload,其作用是确定漏洞攻击成功之后要执行什么操作，Payload基本上是用于访问远程计算机的反向shell和通过shel植入后门等到被入侵的电脑
-</code></pre>
-</li>
-<li><p>4、Post （后渗透攻击模块）</p>
-<pre><code>  收集更多信息或进一步访问被利用的目标系统
-</code></pre>
-</li>
-<li><p>5、Encoders（编码模块）</p>
-<pre><code>  不能确保所有Metasploit中的exp都可以正常工作，有时候 会遇到防火墙、IPS、IDc等，所有的试图攻击等可能会被 防火墙过滤掉，这时候就需要使用Encoders来对exp进行编码等，用来逃避防火墙、IPS、IDs的检测
-</code></pre>
-</li>
-<li><p>6、ptions-选项</p>
-</li>
-</ul>
-<h3 id="实战漏洞利用"><a href="#实战漏洞利用" class="headerlink" title="实战漏洞利用"></a>实战漏洞利用</h3><p>查找目标地址：<br>arp-scan -l</p>
-<p>利用nmap命令探测主机信息：<br>nmap -T4 -A -v 目标IP地址</p>
-<p>进入msf：<br>msfconsole</p>
-<p>利用msf的auxiliary模块进行漏洞验证：</p>
-<ol>
-<li>search ms17-010</li>
-<li>use  exploit（使用其中的渗透攻击（exploit）模块，对其进行渗透攻击）</li>
-<li>set  rhost  目标IP地址</li>
-<li>set  rport   端口号</li>
-<li>set  lhost   本体IP地址</li>
-<li>run （执行）</li>
-</ol>
-<h2 id="wireshark的用法"><a href="#wireshark的用法" class="headerlink" title="wireshark的用法"></a>wireshark的用法</h2><h3 id="WireShark-主要分为这几个界面："><a href="#WireShark-主要分为这几个界面：" class="headerlink" title="WireShark 主要分为这几个界面："></a>WireShark 主要分为这几个界面：</h3><ol>
-<li>Display Filter(显示过滤器)，  用于过滤</li>
-<li>Packet List Pane(封包列表)， 显示捕获到的封包， 有源地址和目标地址，端口号。 颜色不同，代表</li>
-<li>Packet Details Pane(封包详细信息), 显示封包中的字段</li>
-<li>Dissector Pane(16进制数据)</li>
-<li>Miscellanous(地址栏，杂项)</li>
-</ol>
-<h3 id="过滤表达式的规则"><a href="#过滤表达式的规则" class="headerlink" title="过滤表达式的规则"></a>过滤表达式的规则</h3><ol>
-<li>协议过滤<br>比如TCP，只显示TCP协议。</li>
-<li>IP 过滤<br>比如 ip.src &#x3D;&#x3D;192.168.1.102 显示源地址为192.168.1.102，<br>ip.dst&#x3D;&#x3D;192.168.1.102, 目标地址为192.168.1.102</li>
-<li>端口过滤<br>tcp.port &#x3D;&#x3D;80,  端口为80的<br>tcp.srcport &#x3D;&#x3D; 80,  只显示TCP协议的愿端口为80的。</li>
-<li>Http模式过滤<br>http.request.method&#x3D;&#x3D;”GET”,   只显示HTTP GET方法的。</li>
-<li>逻辑运算符为 AND&#x2F; OR</li>
-</ol>
-
+        <h1 id="复习题"><a href="#复习题" class="headerlink" title="复习题"></a>复习题</h1>
+        
       
 
       
